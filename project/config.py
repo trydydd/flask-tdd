@@ -3,18 +3,19 @@ import os
 class BaseConfig:
     """Base configuration"""
     TESTING = False
-    SQL_ALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'my_precious'
 
 class DevelopmentConfig(BaseConfig):
     """Development configuration"""
-    SQL_ALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 class TestingConfig(BaseConfig):
     """Testing Configuration"""
     TESTING = True
-    SQL_ALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_TEST_URL')
   
 
 class ProductionConfig(BaseConfig):
     """Production configuration"""
-    SQL_ALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
