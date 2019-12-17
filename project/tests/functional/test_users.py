@@ -4,7 +4,7 @@ def test_add_user(test_app, test_database):
     client = test_app.test_client()
     resp = client.post(
         '/users',
-        data=json.dums({
+        data=json.dumps({
             'username': 'trey',
             'email': 'nope@nope.com'
         }),
