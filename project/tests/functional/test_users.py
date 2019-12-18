@@ -75,3 +75,21 @@ def test_single_user(test_app, test_database):
     assert 'jeffrey' in data['data']['username']
     assert 'jeffrey@nope.com' in data['data']['email']
     assert 'success' in data['status']
+
+# not implemented in users api
+def test_single_user_no_id(test_app, test_database):
+    client = test_app.test_client()
+    resp = client.get('/users/blah')
+    data = json.loads(resp.data.decode())
+    assert resp.status_code == 404
+    assert 'User does not exist' in data['message']
+    assert 'fail' in data['status']
+
+# not implemented in users api
+def test_single_user_incorrect_id(test_app, test_database):
+    client = test_app.test_client()
+    resp = client.get('/users/999')
+    data = json.loads(resp.data.decode())
+    assert resp.status_code == 404
+    assert 'User does not exist' in data['message']
+    assert 'fail' in data['status']
