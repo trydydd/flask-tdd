@@ -32,5 +32,19 @@ class UsersList(Resource):
         except exc.IntegrityError:
             db.session.rollback()
             return response_object, 400
+class Users(Resource):
+    def get(self, user_id):
+        user = User.query.filter_by(id=user_id).first()
+        response_object = {
+            'status': 'success',
+            'data': {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'active': user.active
+            }
+        }
+        return response_object, 200
 
 api.add_resource(UsersList, '/users')
+api.add_resource(Users, '/users/<user_id>')
