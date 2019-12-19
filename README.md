@@ -2,6 +2,9 @@
 
 TDD using Python, Flask, and Docker
 
+[![pipeline status](https://gitlab.com/terciero/flask-tdd/badges/master/pipeline.svg)](https://gitlab.com/terciero/flask-tdd/commits/master)
+
+
 https://testdriven.io/courses/tdd-flask/getting-started/
 https://flask.palletsprojects.com/en/1.1.x/cli/
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/
