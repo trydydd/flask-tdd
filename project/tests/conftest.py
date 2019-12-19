@@ -1,6 +1,7 @@
 import pytest
 from project import create_app, db
 
+
 @pytest.fixture(scope='module')
 def test_app():
     # setup
@@ -9,6 +10,7 @@ def test_app():
     with app.app_context():
         # testing
         yield app
+
 
 @pytest.fixture(scope='module')
 def test_database():

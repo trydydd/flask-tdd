@@ -13,3 +13,5 @@ https://flask.palletsprojects.com/en/1.1.x/api/#flask.Flask.shell_context_proces
 https://gunicorn.org/
 https://devcenter.heroku.com/
 https://devcenter.heroku.com/articles/heroku-cli
+https://coverage.readthedocs.io/en/coverage-5.0/
+https://gitlab.com/pycqa/flake8

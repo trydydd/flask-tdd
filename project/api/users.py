@@ -4,10 +4,12 @@ from project import db
 from project.api.models import User
 from sqlalchemy import exc
 
-users_blueprint = Blueprint('users',__name__)
+users_blueprint = Blueprint('users', __name__)
 api = Api(users_blueprint)
 
+
 class UsersList(Resource):
+
     def post(self):
         post_data = request.get_json()
         response_object = {
@@ -32,7 +34,7 @@ class UsersList(Resource):
         except exc.IntegrityError:
             db.session.rollback()
             return response_object, 400
-    
+
     def get(self):
         response_object = {
             'status': 'success',
@@ -41,7 +43,8 @@ class UsersList(Resource):
             }
         }
         return response_object, 200
-        
+
+
 class Users(Resource):
     def get(self, user_id):
         response_object = {
@@ -65,6 +68,7 @@ class Users(Resource):
                 return response_object, 200
         except ValueError:
             return response_object, 404
+
 
 api.add_resource(UsersList, '/users')
 api.add_resource(Users, '/users/<user_id>')

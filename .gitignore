@@ -116,3 +116,7 @@ dmypy.json
 
 #vscode
 .vscode/
+
+#coverage
+.htmlcov/
+.coverage
