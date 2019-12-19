@@ -15,3 +15,5 @@ https://devcenter.heroku.com/
 https://devcenter.heroku.com/articles/heroku-cli
 https://coverage.readthedocs.io/en/coverage-5.0/
 https://gitlab.com/pycqa/flake8
+https://black.readthedocs.io/en/stable/
+https://github.com/timothycrosley/isort
