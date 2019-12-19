@@ -1,5 +1,6 @@
 import json
 from project.tests.utils import add_user
+from project.tests.utils import recreate_db
 
 def test_add_user(test_app, test_database):
     client = test_app.test_client()
@@ -92,9 +93,10 @@ def test_single_user_incorrect_id(test_app, test_database):
     assert 'fail' in data['status']
 
 def test_all_users(test_app, test_database):
+    recreate_db()
     add_user('trey', 'trey@nope.com')
-    add_users('robin', 'robin@nope.com')
-    client = test_app.client()
+    add_user('robin', 'robin@nope.com')
+    client = test_app.test_client()
     resp = client.get('/users')
     data = json.loads(resp.data.decode())
     assert resp.status_code == 200
