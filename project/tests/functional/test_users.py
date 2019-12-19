@@ -1,6 +1,5 @@
 import json
-from project import db
-from project.api.models import User
+from project.tests.utils import add_user
 
 def test_add_user(test_app, test_database):
     client = test_app.test_client()
@@ -65,9 +64,7 @@ def test_add_user_duplicate_email(test_app, test_database):
     assert 'fail' in data['status']
 
 def test_single_user(test_app, test_database):
-    user = User(username='jeffrey', email="jeffrey@nope.com")
-    db.session.add(user)
-    db.session.commit()
+    user = add_user(username='jeffrey', email="jeffrey@nope.com")
     client = test_app.test_client()
     resp = client.get(f'/users/{user.id}')
     data = json.loads(resp.data.decode())
@@ -93,3 +90,17 @@ def test_single_user_incorrect_id(test_app, test_database):
     assert resp.status_code == 404
     assert 'User does not exist' in data['message']
     assert 'fail' in data['status']
+
+def test_all_users(test_app, test_database):
+    add_user('trey', 'trey@nope.com')
+    add_users('robin', 'robin@nope.com')
+    client = test_app.client()
+    resp = client.get('/users')
+    data = json.loads(resp.data.decode())
+    assert resp.status_code == 200
+    assert len(data['data']['users']) == 2
+    assert 'trey' in data['data']['users'][0]['username']
+    assert 'trey@nope.com' in data['data']['users'][0]['email']
+    assert 'robin' in data['data']['users'][1]['username']
+    assert 'robin@nope.com' in data['data']['users'][1]['email']
+    assert 'success' in data['status']
